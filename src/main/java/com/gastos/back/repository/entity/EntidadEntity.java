@@ -25,7 +25,6 @@ import lombok.NoArgsConstructor;
 public class EntidadEntity {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	Integer codEntidad;
 	
 	String nombre;

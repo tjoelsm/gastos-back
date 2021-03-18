@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS gt_entidad;
 CREATE TABLE gt_entidad (
-  codEntidad SERIAL NOT NULL,
+  codEntidad Integer NOT NULL,
   nombre VARCHAR(250) NOT NULL,
   web VARCHAR(250) NOT NULL,
   CONSTRAINT pk_gtentidad PRIMARY KEY (codEntidad)
