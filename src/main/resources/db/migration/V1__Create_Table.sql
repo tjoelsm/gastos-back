@@ -39,5 +39,6 @@ CREATE TABLE gt_gastos (
   periodo VARCHAR(6) NOT NULL,
   cod_tipo_gasto Integer NOT NULL,
   importe decimal,
+  fecha Timestamp,
   CONSTRAINT pk_gtgastos PRIMARY KEY (id_registro, periodo, cod_tipo_gasto)
 );
