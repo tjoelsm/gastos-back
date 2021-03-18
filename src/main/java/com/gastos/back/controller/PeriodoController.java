@@ -5,6 +5,7 @@ package com.gastos.back.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,10 +27,16 @@ public class PeriodoController {
 	@Autowired
 	PeriodoService periodoService;
 	
-	@GetMapping(value = "/getAllPeriodos")
+	@GetMapping(value = "/getAllPeriodos", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getAllPeriodos(){
 		log.info("#### Ruuning getAllPeriodos ####");
-		return new ResponseEntity<>("HOLA TIAGO Periodo", HttpStatus.OK);
+		return new ResponseEntity<>(periodoService.getAllPeriodos(), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/getPeriodoAbierto", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getPeriodoAbierto(){
+		log.info("#### Ruuning getPeriodoAbierto ####");
+		return new ResponseEntity<>(periodoService.getPeriodoAbierto(), HttpStatus.OK);
 	}
 
 }

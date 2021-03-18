@@ -13,4 +13,5 @@ import com.gastos.back.repository.entity.PeriodoEntity;
  */
 public interface PeriodoRepo extends JpaRepository<PeriodoEntity, String>{
 
+	PeriodoEntity findByAbierto(Boolean estado);
 }

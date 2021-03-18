@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gastos.back.dto.PeriodoDto;
+import com.gastos.back.repository.entity.PeriodoEntity;
 import com.gastos.back.repository.jdbc.PeriodoRepo;
 import com.gastos.back.repository.mapper.PeriodoMapper;
 import com.gastos.back.service.PeriodoService;
@@ -28,14 +29,14 @@ public class PeriodoServiceImpl implements PeriodoService{
 	
 	@Override
 	public PeriodoDto getPeriodoAbierto() {
-		// TODO Auto-generated method stub
-		return null;
+		PeriodoEntity periodo = periodoRepo.findByAbierto(true);
+		return periodoMapper.toDto(periodo);
 	}
 
 	@Override
 	public List<PeriodoDto> getAllPeriodos() {
-		// TODO Auto-generated method stub
-		return null;
+		List<PeriodoEntity> periodos = periodoRepo.findAll();
+		return periodoMapper.toDto(periodos);
 	}
 
 }

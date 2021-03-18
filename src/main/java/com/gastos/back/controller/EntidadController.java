@@ -5,6 +5,7 @@ package com.gastos.back.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,10 +27,10 @@ public class EntidadController {
 	@Autowired
 	EntidadService entidadService;
 	
-	@GetMapping(value = "/getAllEntidad")
+	@GetMapping(value = "/getAllEntidad", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getAllEntidad(){
 		log.info("#### Ruuning getAllEntidad ####");
-		return new ResponseEntity<>("HOLA TIAGO", HttpStatus.OK);
+		return new ResponseEntity<>(entidadService.getAllEntidades(), HttpStatus.OK);
 	}
 
 }

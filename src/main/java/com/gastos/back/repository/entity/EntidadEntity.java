@@ -3,6 +3,7 @@
  */
 package com.gastos.back.repository.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,6 +26,7 @@ import lombok.NoArgsConstructor;
 public class EntidadEntity {
 	
 	@Id
+	@Column(name="codentidad")
 	Integer codEntidad;
 	
 	String nombre;
