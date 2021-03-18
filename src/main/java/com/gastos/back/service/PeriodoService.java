@@ -8,5 +8,5 @@ package com.gastos.back.service;
  *
  */
 public interface PeriodoService {
-
+	
 }
