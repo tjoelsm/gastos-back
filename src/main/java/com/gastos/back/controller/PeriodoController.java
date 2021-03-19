@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 public class PeriodoController {
 	
 	@Autowired
-	PeriodoService periodoService;
+	private PeriodoService periodoService;
 	
 	@GetMapping(value = "/getAllPeriodos", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getAllPeriodos(){

@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gastos.back.service.EntidadService;
+import com.gastos.back.service.GrupoGastosService;
+import com.gastos.back.service.PeriodoService;
+import com.gastos.back.service.TipoGastosService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,17 +22,17 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @RestController
-@RequestMapping("/entidad")
+@RequestMapping("/tipos")
 @Slf4j
-public class EntidadController {
+public class TiposController {
 	
 	@Autowired
-	private EntidadService entidadService;
+	private TipoGastosService tipoGastosService;
 	
-	@GetMapping(value = "/getAllEntidad", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> getAllEntidad(){
-		log.info("#### Ruuning getAllEntidad ####");
-		return new ResponseEntity<>(entidadService.getAllEntidades(), HttpStatus.OK);
+	@GetMapping(value = "/getAlltipos", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getAlltipos(){
+		log.info("#### Ruuning getAlltipos ####");
+		return new ResponseEntity<>(tipoGastosService.getAllTiposGastos(), HttpStatus.OK);
 	}
-
+	
 }
