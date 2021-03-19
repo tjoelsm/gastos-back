@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gastos.back.dto;
+package com.gastos.back.dto.request;
 
 import java.util.Date;
 
@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode
 @NoArgsConstructor
-public class GastoDto {
+public class GastoRequestDto {
 	
 	private Integer idRegistro;
 	private Integer codTipoGasto;
@@ -26,7 +26,4 @@ public class GastoDto {
 	private Double importe;
 	@JsonFormat(pattern = "dd-MM-YYYY")
 	private Date fecha;
-	
-	private GrupoGastoDto grupo;
-	private TipoGastoDto tipoGasto;
 }

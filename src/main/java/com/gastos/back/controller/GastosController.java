@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gastos.back.dto.GastoDto;
+import com.gastos.back.dto.request.GastoRequestDto;
 import com.gastos.back.service.GastosService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -43,8 +44,9 @@ public class GastosController {
 	}
 	
 	@PostMapping(value = "/addNewGastos", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> addNewGastos(@RequestBody GastoDto gasto){
+	public ResponseEntity<?> addNewGastos(@RequestBody GastoRequestDto gasto){
 		log.info("#### Ruuning addNewGastos ####");
+		
 		return new ResponseEntity<>(gastosService.addNewGasto(gasto), HttpStatus.OK);
 	}
 	

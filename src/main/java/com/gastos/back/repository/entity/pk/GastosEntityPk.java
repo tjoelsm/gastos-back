@@ -20,7 +20,6 @@ import lombok.EqualsAndHashCode;
 public class GastosEntityPk extends SerialEntityPk{
 
 	@Column(name="id_registro")
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer idRegistro;
 	
 	@Column(name="cod_tipo_gasto")

@@ -12,6 +12,7 @@ import com.gastos.back.dto.GastoDto;
 import com.gastos.back.dto.GrupoGastoDto;
 import com.gastos.back.dto.TipoGastoDto;
 import com.gastos.back.repository.entity.GastoEntity;
+import com.gastos.back.repository.entity.pk.GastosEntityPk;
 import com.gastos.back.repository.mapper.GastoMapper;
 
 /**
@@ -24,9 +25,13 @@ public class GastoMapperImpl implements GastoMapper {
 	@Override
 	public GastoEntity toEntity(GastoDto source) {
 		GastoEntity result = new GastoEntity();
-		result.getPk().setIdRegistro(source.getIdRegistro());
-		result.getPk().setCodTipoGasto(source.getCodTipoGasto());
-		result.getPk().setPeriodo(source.getPeriodo());
+		GastosEntityPk gastoPk = new GastosEntityPk(); 
+		if (source.getIdRegistro() != null && source.getIdRegistro() != 0) {
+			gastoPk.setIdRegistro(source.getIdRegistro());
+		}
+		gastoPk.setCodTipoGasto(source.getCodTipoGasto());
+		gastoPk.setPeriodo(source.getPeriodo());
+		result.setPk(gastoPk);
 		result.setImporte(source.getImporte());
 		result.setFecha(source.getFecha());
 		return result;
@@ -50,9 +55,13 @@ public class GastoMapperImpl implements GastoMapper {
 		List<GastoEntity> result = new ArrayList<>();
 		for (GastoDto element : source) {
 			GastoEntity elementEntity = new GastoEntity();
-			elementEntity.getPk().setIdRegistro(element.getIdRegistro());
-			elementEntity.getPk().setCodTipoGasto(element.getCodTipoGasto());
-			elementEntity.getPk().setPeriodo(element.getPeriodo());
+			GastosEntityPk gastoPk = new GastosEntityPk(); 
+			if (element.getIdRegistro() != null && element.getIdRegistro() != 0) {
+				gastoPk.setIdRegistro(element.getIdRegistro());
+			}
+			gastoPk.setCodTipoGasto(element.getCodTipoGasto());
+			gastoPk.setPeriodo(element.getPeriodo());
+			elementEntity.setPk(gastoPk);
 			elementEntity.setImporte(element.getImporte());
 			elementEntity.setFecha(element.getFecha());
 			result.add(elementEntity);

@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 import com.gastos.back.dto.GastoDto;
 import com.gastos.back.dto.GrupoGastoDto;
 import com.gastos.back.dto.TipoGastoDto;
+import com.gastos.back.dto.request.GastoRequestDto;
 import com.gastos.back.repository.entity.GastoEntity;
-import com.gastos.back.repository.entity.TipoGastoEntity;
 import com.gastos.back.repository.jdbc.GastosRepo;
 import com.gastos.back.repository.mapper.GastoMapper;
 import com.gastos.back.service.EntidadService;
@@ -21,6 +21,7 @@ import com.gastos.back.service.GastosService;
 import com.gastos.back.service.GrupoGastosService;
 import com.gastos.back.service.PeriodoService;
 import com.gastos.back.service.TipoGastosService;
+import com.gastos.back.utils.DateUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -63,9 +64,29 @@ public class GastosServiceImpl implements GastosService{
 	}
 
 	@Override
-	public Boolean addNewGasto(GastoDto gasto) {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean addNewGasto(GastoRequestDto gastoEntrada) {
+		GastoDto gasto = new GastoDto();
+		Integer maxRegistro = gastosRepo.getMaxIdRegistroByPeriodo(gastoEntrada.getPeriodo());
+			if (maxRegistro==null) {
+				maxRegistro = 1;
+			}
+		gasto.setIdRegistro(maxRegistro);
+		gasto.setCodTipoGasto(gastoEntrada.getCodTipoGasto());
+		gasto.setImporte(gastoEntrada.getImporte());
+		gasto.setPeriodo(gastoEntrada.getPeriodo());
+		gasto.setFecha(DateUtils.generateCurrentDate());
+		if (validateFieldsGastos(gasto)) {
+			GastoEntity newGasto = gastoMapper.toEntity(gasto);
+				try {
+					gastosRepo.save(newGasto);
+					return true;
+				} catch (Exception e) {
+					log.info("#### ERROR addNewGasto #### {}".concat(e.getMessage()));
+					return false;
+				}			
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -78,7 +99,10 @@ public class GastosServiceImpl implements GastosService{
 		} else {
 			return new ArrayList<>();
 		}		
-
 	}
 
+	private Boolean validateFieldsGastos(GastoDto gasto) {
+		return true;
+	}
+	
 }
