@@ -10,6 +10,6 @@ import com.gastos.back.repository.entity.EntidadEntity;
  * @author tiago
  *
  */
-public interface EntidadMapper extends MapperCore<EntidadDto, EntidadEntity>{
+public interface EntidadMapper extends MapperCore<EntidadDto, EntidadEntity, Integer, Integer>{
 
 }

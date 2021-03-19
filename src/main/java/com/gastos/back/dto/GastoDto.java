@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gastos.back.repository.entity.pk.GastosEntityPk;
 
 import lombok.Data;
@@ -31,5 +32,9 @@ public class GastoDto {
 	private Integer codTipoGasto;
 	private String periodo;
 	private Double importe;
+	@JsonFormat(pattern = "dd-MM-YYYY")
 	private Date fecha;
+	
+	private GrupoGastoDto grupo;
+	private TipoGastoDto tipoGasto;
 }

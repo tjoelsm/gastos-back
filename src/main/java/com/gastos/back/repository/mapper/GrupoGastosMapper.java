@@ -10,6 +10,6 @@ import com.gastos.back.repository.entity.GrupoGastoEntity;
  * @author tiago
  *
  */
-public interface GrupoGastosMapper extends MapperCore<GrupoGastoDto, GrupoGastoEntity>{
+public interface GrupoGastosMapper extends MapperCore<GrupoGastoDto, GrupoGastoEntity, Integer, Integer>{
 
 }

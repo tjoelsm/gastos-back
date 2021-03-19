@@ -5,6 +5,8 @@ package com.gastos.back.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -23,5 +25,6 @@ public class TipoGastoDto {
 	private String tipoGasto;
 	private Boolean activo;
 	private Double valoDefecto;
+	@JsonFormat(pattern = "dd-MM-YYYY")
 	private Date fechaBaja;
 }

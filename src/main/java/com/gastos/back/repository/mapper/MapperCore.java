@@ -9,7 +9,7 @@ import java.util.List;
  * @author tiago
  *
  */
-public interface MapperCore <D,E>{
+public interface MapperCore <D,E,ENTITYTWO,ENTITYTREE>{
 
     /**
      * To entity.
