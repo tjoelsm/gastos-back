@@ -45,5 +45,9 @@ public class Constants {
      * The Constant FORMAT_dd/MM/yyy.
      */
     public static final String FORMAT_DD_MM_YYYY = "dd/MM/yyyy";
+    
+    public static String ERROR_GENERICO = "Ha ocurrido un error generico";
+	public static String ERROR_PERIODO = "No es el periodo actual";
+	public static String SUCCESO = "Operacion Realizada";
 
 }

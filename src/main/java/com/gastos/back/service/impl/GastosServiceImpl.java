@@ -7,12 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.gastos.back.dto.GastoDto;
 import com.gastos.back.dto.GrupoGastoDto;
 import com.gastos.back.dto.TipoGastoDto;
 import com.gastos.back.dto.request.GastoRequestDto;
+import com.gastos.back.dto.response.ResponseGastosDto;
 import com.gastos.back.repository.entity.GastoEntity;
 import com.gastos.back.repository.jdbc.GastosRepo;
 import com.gastos.back.repository.mapper.GastoMapper;
@@ -21,6 +23,8 @@ import com.gastos.back.service.GastosService;
 import com.gastos.back.service.GrupoGastosService;
 import com.gastos.back.service.PeriodoService;
 import com.gastos.back.service.TipoGastosService;
+import com.gastos.back.utils.Commons;
+import com.gastos.back.utils.Constants;
 import com.gastos.back.utils.DateUtils;
 
 import lombok.extern.slf4j.Slf4j;
@@ -64,7 +68,8 @@ public class GastosServiceImpl implements GastosService{
 	}
 
 	@Override
-	public Boolean addNewGasto(GastoRequestDto gastoEntrada) {
+	public ResponseGastosDto addNewGasto(GastoRequestDto gastoEntrada) {
+		ResponseGastosDto newGastoResponse = new ResponseGastosDto(HttpStatus.ACCEPTED, Constants.SUCCESO, false);
 		GastoDto gasto = new GastoDto();
 		Integer maxRegistro = gastosRepo.getMaxIdRegistroByPeriodo(gastoEntrada.getPeriodo());
 			if (maxRegistro==null) {
@@ -75,17 +80,17 @@ public class GastosServiceImpl implements GastosService{
 		gasto.setImporte(gastoEntrada.getImporte());
 		gasto.setPeriodo(gastoEntrada.getPeriodo());
 		gasto.setFecha(DateUtils.generateCurrentDate());
-		if (validateFieldsGastos(gasto)) {
+		if (validateFieldsGastos(gasto, newGastoResponse)) {
 			GastoEntity newGasto = gastoMapper.toEntity(gasto);
 				try {
 					gastosRepo.save(newGasto);
-					return true;
+					return newGastoResponse;
 				} catch (Exception e) {
 					log.info("#### ERROR addNewGasto #### {}".concat(e.getMessage()));
-					return false;
+					return Commons.setResponse(HttpStatus.INTERNAL_SERVER_ERROR, Constants.ERROR_GENERICO, true);
 				}			
 		} else {
-			return false;
+			return newGastoResponse;
 		}
 	}
 
@@ -101,8 +106,15 @@ public class GastosServiceImpl implements GastosService{
 		}		
 	}
 
-	private Boolean validateFieldsGastos(GastoDto gasto) {
-		return true;
+	private Boolean validateFieldsGastos(GastoDto gasto, ResponseGastosDto newGastoResponse) {
+		
+		if (gasto.getPeriodo().length() != 6 ) {
+			newGastoResponse.setCod(HttpStatus.NOT_ACCEPTABLE); 
+			newGastoResponse.setError(true);
+			newGastoResponse.setMensaje(Constants.ERROR_PERIODO);
+		}		
+		 
+		return !newGastoResponse.getError();
 	}
 	
 }
